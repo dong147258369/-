@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>国筑万象</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      background: url('images/detailed_images/background.png') no-repeat center center fixed !important;
+      background-size: cover !important;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <h1>国筑万象</h1>
+      <p class="subtitle">中国古代建筑营造智慧 · 民居 · 官府 · 皇宫 · 桥梁</p>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <div class="narrative-intro">
+      <p>国筑万象，汇集中国古代建筑营造智慧。从民间民居到官府衙署、皇家宫殿，再到跨越山河的桥梁工程，点击专题展开建筑列表，点击建筑名称查看详情，支持拖拽缩放浏览。</p>
+    </div>
+
+    <div class="topic-tree-container">
+      <div id="topicTreeChart" class="topic-tree-chart"></div>
+    </div>
+  </main>
+
+  <!-- 悬浮窗：建筑介绍 + 3D 球形词云（点击具体建筑卡片弹出） -->
+  <div class="topic-modal" id="topicModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="topic-modal-backdrop" id="modalBackdrop"></div>
+    <div class="topic-modal-content">
+      <div class="topic-modal-header">
+        <h2 id="modalTitle" class="topic-modal-title">建筑详情</h2>
+        <span class="topic-modal-icon" title="信息滚动词云">◉</span>
+        <button type="button" class="topic-modal-close" id="modalClose" aria-label="关闭">×</button>
+      </div>
+      <div class="topic-modal-body">
+        <div class="topic-modal-info">
+          <div class="topic-modal-image" id="modalImage"></div>
+          <div class="topic-modal-text">
+            <h3 id="modalSubtitle"></h3>
+            <p id="modalIntro"></p>
+            <p id="modalDetail"></p>
+            <a id="modalDetailLink" href="#" class="topic-modal-link">查看详情 →</a>
+          </div>
+        </div>
+        <div class="topic-modal-cloud">
+          <div class="topic-cloud-label">建筑工艺与类型词云</div>
+          <div id="tagCloudContainer" class="tagcloud-container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <footer class="footer">
+    <div class="footer-center">国筑万象 · 数据来源：《营造法式》《清式营造则例》及各地文物保护名录</div>
+    <div class="footer-map-attribution">中国界省级示意底图数据来自 geo.datav.aliyun.com（阿里云 DataV）。互联网地图审图号以地图服务方公示为准：<a href="https://a.amap.com/pc/static/page/info.html" target="_blank" rel="noopener noreferrer">GS(2024)1158号</a>（高德地图资质页，请以官方最新公示为准）。</div>
+  </footer> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/topics.js"></script>
+</body>
+</html>

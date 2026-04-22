@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官府专题 - 国筑万象</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <h1>国筑万象</h1>
+      <p class="subtitle">官府专题 · 古代行政建筑与等级规制</p>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <div class="topic-header">
+      <h2>官府建筑</h2>
+      <p>从县衙、府衙到省级总督署，古代官府建筑严格遵循等级规制，体现礼制与行政功能</p>
+    </div>
+    <div class="topic-layout">
+      <div class="topic-chart">
+        <div class="panel-title"><span class="title-icon">◆</span> 行政层级分布</div>
+        <div id="topicChart" style="height: 260px;"></div>
+      </div>
+      <div class="topic-list" id="topicList"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-center">数据来源：《营造法式》《清式营造则例》及各地文物保护名录</div>
+    <div class="footer-map-attribution">中国界省级示意底图数据来自 geo.datav.aliyun.com（阿里云 DataV）。互联网地图审图号以地图服务方公示为准：<a href="https://a.amap.com/pc/static/page/info.html" target="_blank" rel="noopener noreferrer">GS(2024)1158号</a>（高德地图资质页，请以官方最新公示为准）。</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script src="js/data.js"></script>
+  <script>
+    const data = GUANFU_DATA;
+    const colors = ['#c41e3a', '#d4a84b', '#4a9c82', '#5b8fc4', '#8b6b9e', '#e07c54'];
+    const subtypeCount = {};
+    data.forEach(d => {
+      subtypeCount[d.subtype] = (subtypeCount[d.subtype] || 0) + 1;
+    });
+    const pieData = Object.entries(subtypeCount).map(([name, value], i) => ({ name, value, itemStyle: { color: colors[i % colors.length] } }));
+    const chart = echarts.init(document.getElementById('topicChart'));
+    chart.setOption({
+      tooltip: { trigger: 'item' },
+      series: [{ type: 'pie', radius: '65%', data: pieData, itemStyle: { borderColor: '#1a1a1a', borderWidth: 2 }, label: { color: '#f5f0e6' } }]
+    });
+    document.getElementById('topicList').innerHTML = data.map(d => `
+      <a href="detail.html?name=${encodeURIComponent(d.name)}" class="topic-card">
+        <span class="card-name">${d.name}</span>
+        <span class="card-info">${d.subtype} · ${d.location} · ${d.era}</span>
+      </a>
+    `).join('');
+  </script>
+</body>
+</html>
